@@ -1,24 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import HomeComponent from './components/HomeComponent';
+import FormComponent from './components/FormComponent';
+import LibroInfoComponent from "./components/LibroInfoComponent";
+import Navbar from 'react-bootstrap/Navbar';
+import { Nav } from 'react-bootstrap';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar bg="dark" variant="dark">
+          <Nav className="mr-auto">
+            <Link to="/">Home</Link>
+            <Link className="ml-3" to="/addBook">Añadir libro</Link>
+          </Nav> 
+        </Navbar> 
+
+        <Switch>
+          <Route exact path="/">
+            <HomeComponent />
+          </Route>
+          <Route exact path="/addBook">
+            <FormComponent />
+          </Route>
+          <Route exact path="/libros/:isbn" component={LibroInfoComponent} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
